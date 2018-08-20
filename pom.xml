@@ -18,7 +18,6 @@
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
     <spring.version>4.3.18.RELEASE</spring.version>
-    <jackson.version>2.9.5</jackson.version>
   </properties>
 
 
@@ -118,13 +117,7 @@
       <version>5.1.4</version>
     </dependency>
     <!-- mybatis相关依赖end -->
-    <!-- jackson start -->
-    <dependency>
-      <groupId>com.fasterxml.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-      <version>${jackson.version}</version>
-    </dependency>
-    <!-- jackson end -->
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>

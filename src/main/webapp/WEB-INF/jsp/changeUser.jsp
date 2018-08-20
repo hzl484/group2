@@ -26,12 +26,12 @@
 <div class="formbody">
 
     <div class="formtitle"><span>用户信息</span></div>
-    <form action="/updateUser">
+    <form action="/updateSussess">
 
         <ul class="forminfo">
-            <li><label>用户姓名</label><input name="username" type="text" class="dfinput" /><i>姓名不能空</i></li>
-            <li><label>用户密码</label><input name="password" type="text" class="dfinput" /><i>密码不能空</i></li>
-            <li><label>用户ID</label><input name="id" type="text" class="dfinput" /><i></i></li>
+            <li><label>用户ID</label><input name="id" readonly="readonly" type="text" class="dfinput" value="${userinfor.id}" /><i></i></li>
+            <li><label>用户姓名</label><input name="username" type="text" class="dfinput" value="${userinfor.username}"/><i>姓名不能空</i></li>
+            <li><label>用户密码</label><input name="password" type="text" class="dfinput" value="${userinfor.password}" /><i>密码不能空</i></li>
             <li><label>&nbsp;</label><input name="" type="submit" class="btn" value="确认修改"/></li>
         </ul>
     </form>

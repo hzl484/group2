@@ -75,7 +75,7 @@
             <td>${it.username}</td>
             <td>${it.password}</td>
             <td>${it.employeeid}</td>
-            <td><a href="#" class="click">修改</a>
+            <td><a href="updateUser?username=${it.username}" class="click1">修改</a>
             <%--<a href="#" class="click" onclick="dele('${it.id}')">删除</a></td>
             <a href="#" class="click">删除</a></td>--%>
             <a href="/dele?id=${it.id}" class="click1">删除</a></td>

@@ -13,11 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/**
- * @author yf
- *  * @date 2018/8/18
- *  user控制器
- */
 @Controller
 @RequestMapping()
 public class UserHandler {
@@ -78,10 +73,23 @@ public class UserHandler {
         return "UserTab";
     }
 
-    @RequestMapping("/updateUser")
+    @RequestMapping("/updateUser") //修改用户
     public String updateUser(HttpServletRequest request){
-      //int num = serviceImp.changeUser();
-        int num =0;
+        String username = request.getParameter("username");
+        System.out.println(username);
+        //获取到id查询此用户，用返回值显示到修改用户页面
+       User user = serviceImp.getUser(username);
+        request.setAttribute("userinfor", user);
+        return "changeUser";
+    }
+    @RequestMapping("/updateSussess")
+    public String updateSussess(HttpServletRequest request,int id,String username,String password){
+        System.out.println(username+"-------"+password);
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setPassword(password);
+       int num= serviceImp.changeUser(user);
         if(num>0){
             request.setAttribute("information", "修改用户成功了哟！");
             return "infor";
@@ -96,8 +104,8 @@ public class UserHandler {
         String id1 = request.getParameter("id");
         Integer id =Integer.parseInt(id1);
         System.out.println(id);
-       //int num = serviceImp.removeUser(id);
-        int num = 2;
+       int num = serviceImp.removeUser(id);
+       // int num = 2;
         //填充数据
         if(num>0){
             request.setAttribute("information", "删除用户成功了哟！");

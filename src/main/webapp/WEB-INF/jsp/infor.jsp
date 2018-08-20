@@ -24,7 +24,6 @@
             <cite>稍等一下哦！</cite>
         </div>
     </div>
-
     <div class="tipbtn">
         <input name="" type="button"  class="sure" value="确定" onclick="dele()" />&nbsp;
         <input name="" type="button"  class="cance" value="取消" />

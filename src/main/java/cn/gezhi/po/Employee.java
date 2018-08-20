@@ -19,8 +19,6 @@ public class Employee {
 
     private String education;
 
-    private String entrytime;
-
     private String status;
 
     private Integer careerid;
@@ -45,14 +43,6 @@ public class Employee {
 
     public String getSex() {
         return sex;
-    }
-
-    public void setEntrytime(String entrytime) {
-        this.entrytime = entrytime == null ? null : entrytime.trim();
-    }
-
-    public String getEntrytime() {
-        return entrytime;
     }
 
     public void setSex(String sex) {
@@ -143,7 +133,6 @@ public class Employee {
                 ", mobile='" + mobile + '\'' +
                 ", email='" + email + '\'' +
                 ", education='" + education + '\'' +
-                ", entrytime='" + entrytime + '\'' +
                 ", status='" + status + '\'' +
                 ", careerid=" + careerid +
                 ", departmentid=" + departmentid +

@@ -19,6 +19,6 @@
   </delete>
   <!--更新用户-->
   <update id="updateUser" parameterType="user">
-    update user set userName=#(username),passWord=#{password} where id=#{id}
+    update user set userName=#(username),passWord=#{password},employeeId=#(employeeId) where id=#{id}
   </update>
 </mapper>
