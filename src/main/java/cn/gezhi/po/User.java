@@ -40,4 +40,14 @@ public class User {
     public void setEmployeeid(Integer employeeid) {
         this.employeeid = employeeid;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", employeeid=" + employeeid +
+                '}';
+    }
 }
