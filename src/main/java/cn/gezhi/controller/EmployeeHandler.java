@@ -3,16 +3,19 @@ package cn.gezhi.controller;
 import cn.gezhi.po.Employee;
 import cn.gezhi.service.EmployeeService;
 import com.github.pagehelper.PageInfo;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 /**
-/ Employee控制器
+ * @author hzl
+ * @date 2018/8/18
+ *
+ * Employee控制器
  */
 @Controller
 @RequestMapping("/employee")
@@ -22,30 +25,33 @@ public class EmployeeHandler {
     @Autowired
     private HttpServletRequest request;
 
-    @RequestMapping("/showDetail")
-    public ModelAndView getEmployee(int id){
-        ModelAndView mav = new ModelAndView();
-        Employee employee = service.getById(id);
-        mav.addObject("employee",employee);
-        return mav;
-    }
+    private static final int PAGESIZE = 10;
 
+    //显示员工信息列表
     @RequestMapping("/show")
-    public ModelAndView getAllEmployee(int page){
-        ModelAndView mav = new ModelAndView();
-        PageInfo<Employee> pageInfo = service.showeEmployee(page,10);
-        mav.addObject("employeeList",pageInfo);
-        mav.setViewName("employeeList");
-        return mav;
+    public String  getAllEmployee( Model model){
+        PageInfo<Employee> pageInfo = service.showeEmployee(1,PAGESIZE);
+        model.addAttribute("pageInfo",pageInfo);
+        return "right";
     }
 
+    //进入员工信息添加页面
+    @RequestMapping("/addEmployee")
+    public String addEmployee(){
+        return "addEmployee";
+    }
+
+    //提交添加的员工信息
     @RequestMapping("/add")
-    public String addEmployee(int id,String name,String sex,int age,String idCardNum,String address,String mobile,String email,String education,String status,int careerId,int departmentId) {
+    @ResponseBody
+    public int add(int id, String name, String sex, int age, String idCardNum, String entryTime, String address, String mobile, String email, String education, String status, int careerId, int departmentId) {
         Employee employee = new Employee();
         employee.setId(id);
+        employee.setName(name);
         employee.setSex(sex);
         employee.setAge(age);
         employee.setIdcardnum(idCardNum);
+        employee.setEntrytime(entryTime);
         employee.setAddress(address);
         employee.setMobile(mobile);
         employee.setEmail(email);
@@ -55,18 +61,32 @@ public class EmployeeHandler {
         employee.setDepartmentid(departmentId);
         int result = service.addEmployee(employee);
         if (result > 0) {
-            return "addSuccess";
+            request.setAttribute("msg",1);
         }
-        return "error";
+        request.setAttribute("msg",0);
+        return result;
     }
 
+    //进入员工信息更新页面
+    @RequestMapping("/showDetail")
+    public String getEmployee(Model model,int id){
+//        int id = Integer.parseInt(request.getParameter("id"));
+        Employee employee = service.getById(id);
+        model.addAttribute("employee",employee);
+        return "updateEmployee";
+    }
+
+    //提交更新的员工信息
     @RequestMapping("/update")
-    public String updateEmployee(int id,String name,String sex,int age,String idCardNum,String address,String mobile,String email,String education,String status,int careerId,int departmentId){
+    @ResponseBody
+    public int updateEmployee(int id,String name,String sex,int age,String idCardNum,String entryTime,String address,String mobile,String email,String education,String status,int careerId,int departmentId){
         Employee employee = new Employee();
         employee.setId(id);
+        employee.setName(name);
         employee.setSex(sex);
         employee.setAge(age);
         employee.setIdcardnum(idCardNum);
+        employee.setEntrytime(entryTime);
         employee.setAddress(address);
         employee.setMobile(mobile);
         employee.setEmail(email);
@@ -75,9 +95,10 @@ public class EmployeeHandler {
         employee.setCareerid(careerId);
         employee.setDepartmentid(departmentId);
         int result = service.update(employee);
-        if (result > 0){
-            return "updateSuccess";
+        if (result > 0) {
+            request.setAttribute("msg",1);
         }
-        return "error";
+        request.setAttribute("msg",0);
+        return result;
     }
 }

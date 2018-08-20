@@ -2,10 +2,16 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
   <display-name>Archetype Created Web Application</display-name>
   <!--定义配置路径，通过ContextLoaderListener加载-->
+  <!--加载顺序 context-param -> listener -> filter -> servlet-->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+  </welcome-file-list>
+
   <context-param>
     <param-name>contextConfigLocation</param-name>
     <param-value>classpath:spring/spring-dao.xml</param-value>
   </context-param>
+
   <!-- ContextLoaderListener作用就是启动Web容器时，自动装配配置信息 -->
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -18,10 +24,6 @@
     <init-param>
       <param-name>encoding</param-name>
       <param-value>utf-8</param-value>
-    </init-param>
-    <init-param>
-      <param-name>forceEncoding</param-name>
-      <param-value>true</param-value>
     </init-param>
   </filter>
   <filter-mapping>
