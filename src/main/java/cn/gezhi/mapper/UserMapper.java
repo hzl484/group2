@@ -11,4 +11,5 @@ public interface UserMapper {
     List<User> selectAllUser();//查询所有用户
     int deleteUser(Integer id);//删除用户
     int updateUser(User user);//更新用户
+    List<User> selectSearchAll(User user);//搜索用户
 }

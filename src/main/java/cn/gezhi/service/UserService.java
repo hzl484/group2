@@ -10,4 +10,5 @@ public interface UserService {
     List<User> getAllUser();//查询所有用户
     int removeUser(Integer id);//删除用户
     int changeUser(User user);//更新用户
+    List<User> searchAll(User user);//搜索用户
 }

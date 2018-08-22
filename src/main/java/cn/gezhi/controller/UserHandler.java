@@ -11,8 +11,22 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.List;
+/**
+ * 1.login界面登录的拦截
+ * 2.搜索时的传值
+ * 3.ajax获取值乱码
+ * 4.分页处理
+ */
 
+
+
+/**
+ * @Author yf
+ * date : 8-20
+ * name :UserController
+ */
 @Controller
 @RequestMapping()
 public class UserHandler {
@@ -28,7 +42,7 @@ public class UserHandler {
         }else{
             if(username.equals(user.getUsername()) && password.equals(user.getPassword())){
                 request.setAttribute("user",user);
-                return "U_main";
+                return "main";
             }else{
                 request.setAttribute("user","用户名或密码输入错误");
             }
@@ -83,10 +97,12 @@ public class UserHandler {
         return "changeUser";
     }
     @RequestMapping("/updateSussess")
-    public String updateSussess(HttpServletRequest request,int id,String username,String password){
-        System.out.println(username+"-------"+password);
+    public String updateSussess(HttpServletRequest request,String id,String username,String password){
+        System.out.println(id+"-------"+username+"-------"+password);
+        Integer id1 =Integer.parseInt(id);
+        System.out.println(id1);
         User user = new User();
-        user.setId(id);
+        user.setId(id1);
         user.setUsername(username);
         user.setPassword(password);
        int num= serviceImp.changeUser(user);
@@ -117,10 +133,33 @@ public class UserHandler {
 
         //方法返回值就是试图名
     }
-    @RequestMapping("/index")
-    public String returnMain(){
-        return "U_main";
+    @RequestMapping("/searchUser")
+    public String searchUser(HttpServletRequest request){   //搜获用户
+       String getValue = request.getParameter("name");
+        System.out.println(getValue);
+        return "";
     }
+    @RequestMapping("/verification")
+    public String verification(HttpServletRequest request,HttpServletResponse response) throws IOException {
+        String username = request.getParameter("username");
+        username = URLDecoder.decode(username,"UTF-8");
+        System.out.println(username);
+        User user = serviceImp.getUser(username);
+        if(user != null){
+            //用户名存在，不可用
+            response.getWriter().write("no");
+        }else{
+            //可用
+            response.getWriter().write("ok");
+        }
+        return "";
+    }
+
+
+//    @RequestMapping("/index")
+//    public String returnMain(){
+//        return "U_main";
+//    }
     @RequestMapping("/U_left")
     public String returnleft(){
         return "U_left";

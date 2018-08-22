@@ -46,7 +46,7 @@
 <div class="loginbody">
 
     <span class="systemlogo"></span>
-    <form action="/loginView" method="post" name="userForm">
+    <form action="/loginView" method="post" name="userForm" onsubmit="return checkForm()">
     <div class="loginbox">
         <ul>
             <li><input name="username" type="text" class="loginuser" onblur="checkUsername(this.value)"

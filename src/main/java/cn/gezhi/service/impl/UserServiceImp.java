@@ -13,27 +13,38 @@ public class UserServiceImp implements UserService {
     @Autowired
     private UserMapper mapper;
     @Override
+    //添加用户
     public int addUser(User user) {
         return mapper.insertUser(user);
     }
 
     @Override
+    //查询用户
     public User getUser(String username) {
         return mapper.selectUser(username);
     }
 
     @Override
+    //查询所有用户
     public List<User> getAllUser() {
         return mapper.selectAllUser();
     }
 
     @Override
+    //删除用户
     public int removeUser(Integer id) {
         return mapper.deleteUser(id);
     }
 
     @Override
+    //修改用户
     public int changeUser(User user) {
         return mapper.updateUser(user);
+    }
+
+    @Override
+    //用户搜索
+    public List<User> searchAll(User user) {
+        return mapper.selectSearchAll(user);
     }
 }

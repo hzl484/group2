@@ -19,6 +19,22 @@
   </delete>
   <!--更新用户-->
   <update id="updateUser" parameterType="user">
-    update user set userName=#(username),passWord=#{password},employeeId=#(employeeId) where id=#{id}
+    update user
+     <set>
+       <if test="username != null and username != ''">
+         userName = #{username},
+       </if>
+       <if test="password != null and password != ''">
+         passWord = #{password}
+       </if>
+     </set>
+    where id =#{id}
   </update>
+  <!--部分搜索-->
+  <select id="selectSearchAll" parameterType="String" resultType="user">
+    select * from user where 1=1
+    <if test="uasername != null and username != ''">
+      and username like '${username}%'
+    </if>
+  </select>
 </mapper>
