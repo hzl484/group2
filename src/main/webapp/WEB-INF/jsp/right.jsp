@@ -97,15 +97,10 @@
     <div class="pagin">
         <div class="message">共<i class="blue">${pageInfo.total}</i>条记录，当前显示第&nbsp;<i class="blue">${pageInfo.pageNum}&nbsp;</i>页</div>
         <ul class="paginList">
-            <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
-            <li class="paginItem current"><a href="javascript:;">1</a></li>
-            <li class="paginItem"><a href="javascript:;">2</a></li>
-            <li class="paginItem"><a href="javascript:;">3</a></li>
-            <li class="paginItem"><a href="javascript:;">4</a></li>
-            <li class="paginItem"><a href="javascript:;">5</a></li>
-            <li class="paginItem more"><a href="javascript:;">...</a></li>
-            <li class="paginItem"><a href="javascript:;">10</a></li>
-            <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
+            <li class="paginItem"><a href="/employee/show?pageNum=${pageInfo.firstPage}">首页</a></li>
+            <li class="paginItem"><a href="/employee/show?pageNum=${pageInfo.prePage}">上一页</a></li>
+            <li class="paginItem"><a href="/employee/show?pageNum=${pageInfo.nextPage}">下一页</a></li>
+            <li class="paginItem"><a href="/employee/show?pageNum=${pageInfo.lastPage}">尾页</a></li>
         </ul>
     </div>
 

@@ -30,7 +30,13 @@ public class EmployeeHandler {
     //显示员工信息列表
     @RequestMapping("/show")
     public String  getAllEmployee( Model model){
-        PageInfo<Employee> pageInfo = service.showeEmployee(1,PAGESIZE);
+        int pageNum = 1;
+        if(request.getParameter("pageNum")==null || "".equals(request.getParameter("pageNum")) || "0".equals( request.getParameter("pageNum"))){
+            pageNum=1;
+        }else{
+            pageNum=Integer.parseInt(request.getParameter("pageNum"));
+        }
+        PageInfo<Employee> pageInfo = service.showeEmployee(pageNum,PAGESIZE);
         model.addAttribute("pageInfo",pageInfo);
         return "right";
     }
